@@ -15,6 +15,7 @@
     border-bottom: 3px solid transparent;
     width: 90%;
     display: block;
+    transition: all 0.3s;
 
     &:focus {
       //инпут полетата по подразбиране имат очертание при задържане
@@ -51,5 +52,58 @@
     visibility: hidden;
     //падащ ефект
     transform: translateY(-4rem);
+  }
+
+  &__radio-group {
+    //за да застанат еднло до друго
+    width: 49%;
+    display: inline-block;
+  }
+
+  &__radio-input{
+    display: none;
+  }
+
+  &__radio-label {
+    font-size: $default-font-size;
+    cursor: pointer;
+    position: relative;
+    padding-left: 4.5rem;
+  }
+
+  &__radio-button {
+    //правим кръг, за да го поставим над редио бутона, защото радио бутона не може да се стилизира
+    //ще използваме само функциите на радио бутона, дали е натиснат или не
+    //всъщност ще е невидим(не скрит, а невидим)
+    height: 3rem;
+    width: 3rem;
+    border: 5px solid $color-primary;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: -0.4rem;
+
+    //точка в средата на кръга/бутона
+    &::after {
+      content: "";
+      height: 1.3rem;
+      width: 1.3rem;
+      display: block;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: $color-primary;
+      //първоначално няма да се вижда
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+  }
+  //когато радио бутонът е избран
+  &__radio-input:checked ~ &__radio-label &__radio-button::after {
+    //за да стане точицата в кръга/бутона видима
+    opacity: 1;
   }
 }
