@@ -1,0 +1,55 @@
+.form {
+  &__group {
+    margin-bottom: 2rem;
+  }
+
+  &__input {
+    font-size: 1.5rem;
+    color: inherit;
+    font-family: inherit;
+    padding: 1.5rem 2rem;
+    border-radius: 2px;
+    background-color: rgba($color-white, 0.5);
+    border: none;
+    //защото при фокусиране и появата на долница граница ще подмести леко елемента, защото иначе ще е допълнително добавяне
+    border-bottom: 3px solid transparent;
+    width: 90%;
+    display: block;
+
+    &:focus {
+      //инпут полетата по подразбиране имат очертание при задържане
+      outline: none;
+      box-shadow: 0 1rem 2rem rgba($color-black, 0.1);
+      border-bottom: 3px solid $color-primary;
+    }
+    //селекотр, който се активира, когато полето е невалидно(има невалидни данни)
+    &:focus:invalid {
+      border-bottom: 3px solid $color-secondary-dark;
+    }
+
+    //селектор, който обхваща плейсхолдъра в инпут полетата
+    &::-webkit-input-placeholder {
+      color: $color-grey-dark-1;
+    }
+  }
+
+  &__label {
+    font-size: 1.2rem;
+    font-weight: 700;
+    //отстояние отляво, за да застане точно под името в инпут полето
+    margin-left: 2rem;
+    margin-top: 0.7rem;
+    //за да застане под инпут полето
+    display: block;
+    transition: all 0.3s;
+  }
+  //ще се активира, когато плейсхолдъра в инпут полето е видимо
+  //лейбъла ще е невидим, докато плейсхолдъра е видим и обратно
+  //+ хваща братски елемент, следващият след елемента на 1 ниво
+  &__input:placeholder-shown + &__label {
+    opacity: 0;
+    visibility: hidden;
+    //падащ ефект
+    transform: translateY(-4rem);
+  }
+}

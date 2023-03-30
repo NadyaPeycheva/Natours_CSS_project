@@ -34,3 +34,35 @@ margin-top:-10rem;
   position: relative;
   padding: 15rem 0;
 }
+/*имаме 3 контейнера
+- book целия контейнер с фон
+  - в него имаме row-ред и 
+    -и в този ред book снимката
+*/
+
+.section-book{
+  padding: 15rem 0;
+  background-image: linear-gradient(to right bottom, $color-primary-light,$color-primary-dark);
+
+}
+.book{
+  /*градиент:
+   тови път посочваме посоката, чрез градуси и във точките от градиента(0%,50%) посочваме цвета
+   ор 50% до края задаваме да е прозрачно
+   за да се получи тази крива по срядата*/
+  background-image:linear-gradient(105deg,
+  rgba($color-white,.9)0%,
+  rgba($color-white,.9) 50%,transparent 50%), url(../img/nat-10.jpg);
+  //bacground-size:cober===bacground-size:100%
+  background-size: 100%;
+  border-radius: 3px;
+  box-shadow:0 1.5rem 4rem rgba($color-black,.2);
+
+  height: 50rem;
+
+  &__form{
+    //за да заема половината място
+    width: 50%;
+    padding:6rem;
+  }
+}
