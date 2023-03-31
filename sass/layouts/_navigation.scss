@@ -1,0 +1,170 @@
+.navigation {
+  &__checkbox {
+    //скриваме полето за отметка
+    display: none;
+  }
+
+  &__button {
+    //бутонът, който ще е върху чекбокса(чекбокса ще е скрит)
+    background-color: $color-white;
+    height: 7rem;
+    width: 7rem;
+    position: fixed;
+    //за да е в десния ъгъл
+    top: 6rem;
+    right: 6rem;
+    border-radius: 50%;
+    //за да е най-отгоре, дори над фона
+    z-index: 2000;
+    box-shadow: 0 1rem 3rem rgba($color-black, 0.1);
+    //центрита черичките
+    text-align: center;
+    cursor: pointer;
+  }
+
+  &__background {
+    //за да е навигацията кръг
+    height: 6rem;
+    width: 6rem;
+    border-radius: 50%;
+    //за да е на ч позиция, дори когато скролваме по екрана
+    position: fixed;
+    //за да е в десния ъгъл
+    top: 6.5rem;
+    right: 6.5rem;
+    //градиента започва от центъра и се разнася във всички страни
+    background-image: radial-gradient(
+      $color-primary-light,
+      $color-primary-dark
+    );
+    // за да е винаги  най-отпред
+    z-index: 1000;
+    transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1);
+  }
+
+  &__nav {
+    //ще е на цял екран, независимо на кое страница сме
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1500;
+    //за да може първоначално да е скрита
+    opacity: 0;
+    width: 0;
+    //cubic-bezier-показва кога да се забърза анимацията и кога да се забави
+    transition: all 0.8s cubic-bezier(0.86, 0, 0.07, 1);
+  }
+
+  &__list {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    list-style: none;
+    text-align: center;
+    width: 100%;
+  }
+
+  &__item {
+    margin: 1rem;
+  }
+
+  &__link {
+    &:link,
+    &:visited {
+      //защото преместването при задържането иначе няма да работи
+      display: inline-block;
+      font-size: 3rem;
+      font-weight: 300;
+      color: $color-white;
+      text-decoration: none;
+      text-transform: uppercase;
+      //отново посочваме посока, чрез градуси за ъгъл
+      background-image: linear-gradient(
+        120deg,
+        transparent 0%,
+        transparent 50%,
+        $color-white 50%
+      );
+      //за да може прозрачният цвят да обхване целият елемент
+      background-size: 220%;
+      transition: all 0.4s;
+
+      span {
+        margin-right: 1rem;
+        display: inline-block;
+      }
+    }
+
+    &:hover,
+    &:active {
+      background-position: 100%;
+      color: $color-primary;
+      transform: translateX(1rem);
+    }
+  }
+  //фонът/bacground да се уголемява, когато чекбокса е зибран
+  &__checkbox:checked ~ &__background {
+    transform: scale(80);
+  }
+
+  &__checkbox:checked ~ &__nav {
+    //навигацията става видима
+    opacity: 1;
+    width: 100%;
+  }
+  //ICON
+  //създаваме 3-те чертички в навигацията
+  &__icon {
+    position: relative;
+    //за да пасне в кръгчето
+    margin-top: 3.5rem;
+    &,
+    &::before,
+    &::after {
+      width: 3rem;
+      height: 2px;
+      background-color: $color-grey-dark-3;
+      display: inline-block;
+    }
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      transition: all .2s;
+    }
+    //отгоре чертичка
+    &::before {
+      top: -0.8rem;
+    }
+    //долу чертичка
+    &::after {
+      top: 0.8rem;
+    }
+  }
+  //когато бутонът е задържан, чертичките ще се раздалечат/ ще се преместят
+  &__button:hover &__icon::before {
+    top:-1rem;
+}
+&__button:hover &__icon::after {
+    top:1rem;
+
+}
+//когато чекбокса е избран, фонът на бутона и иконата(средната черта ще станат невидими)
+&__checkbox:checked+&__button &__icon{
+    background-color: transparent;
+}
+//осталите две видими чери ги позиционираме за хикс
+&__checkbox:checked+&__button &__icon::before{
+top:0;
+//135deg=40deg(но е 135, за да стане анимацията на завъртане)
+transform: rotate(135deg);
+}
+&__checkbox:checked+&__button &__icon::after{
+    top:0;
+    transform: rotate(-135deg);}
+}
